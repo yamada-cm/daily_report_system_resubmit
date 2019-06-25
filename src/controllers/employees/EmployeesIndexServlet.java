@@ -44,6 +44,7 @@ public class EmployeesIndexServlet extends HttpServlet {
         catch (NumberFormatException e)
         { }
 
+        // データベース上の情報をリスト型にして取得
         List<Employee> employees =em.createNamedQuery("getAllEmployees",Employee.class)
                 .setFirstResult(15*(page-1))
                 .setMaxResults(15)
