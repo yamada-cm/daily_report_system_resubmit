@@ -9,7 +9,7 @@ import models.Employee;
 import utils.DBUtil;
 
 public class EmployeeValidator {
-    public static  List<String> validate(Employee e,Boolean code_duplicate_check_flag)
+    public static  List<String> validate(Employee e,Boolean code_duplicate_check_flag, Boolean password_check_flag)
     {
         List<String> errors =new ArrayList<String>();
 
@@ -25,7 +25,7 @@ public class EmployeeValidator {
             errors.add(name_error);
         }
 
-        String password_error=_validatePassword(e.getName());
+        String password_error=_validatePassword(e.getName(),password_check_flag);
         if(!code_error.equals(""))
         {
             errors.add(password_error);
@@ -58,7 +58,7 @@ public class EmployeeValidator {
         return "";
     }
 
-        // 社員名の必須入力チェック
+    // 社員名の必須入力チェック
     private static String _validateName(String name)
         {
             if(name==null||name.equals(""))
@@ -69,8 +69,8 @@ public class EmployeeValidator {
             return "";
         }
 
-        // パスワードの必須入力チェック
-        private static String _validatePassword(String password , Boolean password_check_flag)
+    // パスワードの必須入力チェック
+    private static String _validatePassword(String password , Boolean password_check_flag)
         {
             // パスワードを変更する場合のみ実行
             if(password_check_flag && (password==null||password.equals("")))
