@@ -53,19 +53,21 @@ public class EmployeesUpdateServlet extends HttpServlet {
             {
                 code_duplicate_check=false;
             }
+            // それ以外は値を更新
             else
             {
                 e.setCode(request.getParameter("code"));
             }
 
             // パスワード入力欄に入力があったら
-            // パスワードの入力地にチェックを行う指定をする
+            // パスワードの入力値にチェックを行う指定をする
             Boolean password_check_flag=true;
             String password=request.getParameter("password");
             if (password==null||password.equals(""))
             {
                 password_check_flag=false;
             }
+            // それ以外は値を更新
             else
             {
                 e.setPassword(
@@ -76,9 +78,9 @@ public class EmployeesUpdateServlet extends HttpServlet {
                         );
             }
 
-            e.setName("name");
+            e.setName(request.getParameter("name"));
             e.setAdmin_flag(Integer.parseInt(request.getParameter("admin_flag")));
-            e.setUpdate_at(new Timestamp(System.currentTimeMillis()));
+            e.setUpdated_at(new Timestamp(System.currentTimeMillis()));
             e.setDelete_flag(0);
 
             // バリデーションを実行してエラーがあったら新規登録のフォームに戻る
